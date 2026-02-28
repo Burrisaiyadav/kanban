@@ -33,11 +33,6 @@ export const CustomKanban = () => {
             </h1>
             <p className="text-neutral-500 text-sm mt-1">Manage your tasks with a premium touch.</p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 backdrop-blur-sm">
-                <Layers className="w-5 h-5 text-indigo-400" />
-            </div>
-          </div>
         </header>
         <Board />
       </div>
