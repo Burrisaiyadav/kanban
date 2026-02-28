@@ -234,7 +234,13 @@ const Column = ({ title, cards, column, setCards, accentColor, icon }) => {
   );
 };
 
-const Card = ({ title, _id, id, column, handleDragStart, accentColor }) => {
+const Card = ({ title, _id, id, column, createdAt, handleDragStart, accentColor }) => {
+  const formatDate = (dateString) => {
+    if (!dateString) return "Just now";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  };
+
   return (
     <>
       <DropIndicator beforeId={_id || id} column={column} />
@@ -253,9 +259,8 @@ const Card = ({ title, _id, id, column, handleDragStart, accentColor }) => {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 text-[10px] text-neutral-500 font-medium">
               <Calendar className="w-3 h-3" />
-              <span>Mar 1</span>
+              <span>{formatDate(createdAt)}</span>
             </div>
-            <div className={`h-1.5 w-1.5 rounded-full bg-${accentColor}-500/50 shadow-[0_0_8px] shadow-${accentColor}-500/50`} />
           </div>
         </div>
       </motion.div>

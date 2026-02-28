@@ -5,16 +5,16 @@ const Card = require('../models/Card');
 
 // In-memory fallback if MongoDB is not connected
 let mockCards = [
-    { _id: '1', title: "Look into render bug in dashboard", column: "backlog", order: 0 },
-    { _id: '2', title: "SOX compliance checklist", column: "backlog", order: 1 },
-    { _id: '3', title: "[SPIKE] Migrate to Azure", column: "backlog", order: 2 },
-    { _id: '4', title: "Document Notifications service", column: "backlog", order: 3 },
-    { _id: '5', title: "Research DB options for new microservice", column: "todo", order: 0 },
-    { _id: '6', title: "Postmortem for outage", column: "todo", order: 1 },
-    { _id: '7', title: "Sync with product on Q3 roadmap", column: "todo", order: 2 },
-    { _id: '8', title: "Refactor context providers to use Zustand", column: "doing", order: 0 },
-    { _id: '9', title: "Add logging to daily CRON", column: "doing", order: 1 },
-    { _id: '10', title: "Set up DD dashboards for Lambda listener", column: "done", order: 0 },
+    { _id: '1', title: "Look into render bug in dashboard", column: "backlog", order: 0, createdAt: new Date().toISOString() },
+    { _id: '2', title: "SOX compliance checklist", column: "backlog", order: 1, createdAt: new Date().toISOString() },
+    { _id: '3', title: "[SPIKE] Migrate to Azure", column: "backlog", order: 2, createdAt: new Date().toISOString() },
+    { _id: '4', title: "Document Notifications service", column: "backlog", order: 3, createdAt: new Date().toISOString() },
+    { _id: '5', title: "Research DB options for new microservice", column: "todo", order: 0, createdAt: new Date().toISOString() },
+    { _id: '6', title: "Postmortem for outage", column: "todo", order: 1, createdAt: new Date().toISOString() },
+    { _id: '7', title: "Sync with product on Q3 roadmap", column: "todo", order: 2, createdAt: new Date().toISOString() },
+    { _id: '8', title: "Refactor context providers to use Zustand", column: "doing", order: 0, createdAt: new Date().toISOString() },
+    { _id: '9', title: "Add logging to daily CRON", column: "doing", order: 1, createdAt: new Date().toISOString() },
+    { _id: '10', title: "Set up DD dashboards for Lambda listener", column: "done", order: 0, createdAt: new Date().toISOString() },
 ];
 
 const isDbConnected = () => mongoose.connection.readyState === 1;
@@ -40,7 +40,8 @@ router.post('/', async (req, res) => {
             _id: Math.random().toString(36).substr(2, 9),
             title: req.body.title,
             column: req.body.column,
-            order: req.body.order || 0
+            order: req.body.order || 0,
+            createdAt: new Date().toISOString()
         };
         mockCards.push(newCard);
         return res.status(201).json(newCard);
